@@ -1,0 +1,10 @@
+@import "../variables.scss";
+
+.App {
+  text-align: center;
+  background: inherit;
+  color: $color-white;
+  font-family: $font-stack;
+  height: 100%;
+  width: 100%;
+}

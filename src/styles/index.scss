@@ -1,0 +1,41 @@
+@import "./variables.scss";
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  color: $color-white;
+  background: $main-bg;
+
+  .container {
+    position: relative;
+    padding: 0 15px 0 15px;
+    @include xs-devices {
+      max-width: 100%;
+    }
+    @include sm-devices {
+      max-width: 100%;
+    }
+    @include md-devices {
+      max-width: 750px;
+    }
+    @include lg-devices {
+      max-width: 960px;
+    }
+    @include xl-devices {
+      max-width: 1140px;
+    }
+  }
+}
