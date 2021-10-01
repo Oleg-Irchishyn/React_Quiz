@@ -1,45 +1,48 @@
 import React from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styles from './styles/components/App.module.scss';
 import cn from 'classnames';
-import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { initializeAppSelector } from './redux/selectors/appSelectors';
-import { Preloader, SliderExample } from './components/common';
+import { Preloader } from './components/common';
 import { AppStateType } from './redux/store';
 import { initializeApp } from './redux/reducers/appReducer';
+import { StartScreen } from './components/';
+import { withSuspense } from './hoc/WithSuspense';
 
-/* React Lazy example
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
-const SuspendedProfile = withSuspense(ProfileContainer);
-*/
+const QuizSlider = React.lazy(() => import('./components/common/Sliders/'));
+const SuspendedQuizSlider = withSuspense(QuizSlider);
 
-const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
+const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, initialized }) => {
     React.useEffect(() => {
       initializeApp();
     }, []);
 
+    const [visibleStartSection, setVisibleStartSection] = React.useState<boolean>(true);
+    const [visibleSliderSection, setVisibleSliderSection] = React.useState<boolean>(false);
+
+    const handleSetVisibleSection = (value: boolean): void => {
+      setVisibleStartSection(value);
+      setVisibleSliderSection(true);
+    };
+
+    const handleSetVisibleSliderSection = (value: boolean): void => {
+      setVisibleSliderSection(value);
+    };
+
     if (!initialized) {
       return <Preloader />;
     }
 
-    let sliderSettings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
-
     return (
       <div className={styles.App}>
-        <SliderExample />
-        <Switch>
-          <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-          {/*<Route path="/profile/:userId?" render={() => <SuspendedProfile />} />*/}
-        </Switch>
+        {visibleStartSection && <StartScreen handleSetVisibleSection={handleSetVisibleSection} />}
+        {visibleSliderSection && (
+          <SuspendedQuizSlider handleSetVisibleSliderSection={handleSetVisibleSliderSection} />
+        )}
       </div>
     );
   },
@@ -52,6 +55,11 @@ const mapStateToProps = (state: AppStateType) => ({
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   initializeApp: () => void;
+};
+
+type ownProps = {
+  handleSetVisibleSection: (value: boolean) => void;
+  handleSetVisibleSliderSection: (value: boolean) => void;
 };
 
 export default compose<React.ComponentType>(

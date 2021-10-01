@@ -4,38 +4,38 @@ import styles from './../../../styles/components/Sliders.module.scss';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const SliderExample: React.FC = () => {
+const QuizNextArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: 'red' }}
+      onClick={onClick}
+    />
+  );
+};
+const QuizPrevArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', background: 'green' }}
+      onClick={onClick}
+    />
+  );
+};
+
+const QuizSlider: React.FC<ownProps> = ({ handleSetVisibleSliderSection }) => {
   var settings = {
     dots: true,
     infinite: false,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    slidesToShow: 4,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1199,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    nextArrow: <QuizPrevArrow />,
+    prevArrow: <QuizNextArrow />,
   };
   return (
     <Slider {...settings}>
@@ -61,4 +61,8 @@ const SliderExample: React.FC = () => {
   );
 };
 
-export default SliderExample;
+type ownProps = {
+  handleSetVisibleSliderSection: (value: boolean) => void;
+};
+
+export default QuizSlider;
