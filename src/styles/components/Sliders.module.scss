@@ -1,1 +1,19 @@
-@import '../variables.scss';
+@import "../variables.scss";
+
+.inner_paging__info {
+    position: relative;
+    font-size: 20px;
+    color: red;
+}
+
+.quizSlider {
+    position: relative;
+}
+
+.activity {
+    background: green;
+}
+
+.hactivity {
+    background: cyan;
+}
