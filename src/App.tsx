@@ -41,6 +41,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
       <div className={styles.App}>
         {visibleStartSection && <StartScreen handleSetVisibleSection={handleSetVisibleSection} />}
         {visibleSliderSection && (
+          //@ts-ignore
           <SuspendedQuizSlider handleSetVisibleSliderSection={handleSetVisibleSliderSection} />
         )}
       </div>

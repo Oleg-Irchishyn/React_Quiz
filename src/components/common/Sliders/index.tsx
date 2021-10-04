@@ -1,41 +1,44 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import styles from './../../../styles/components/Sliders.module.scss';
 import cn from 'classnames';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { AppStateType } from '../../../redux/store';
+import { getQuizQuestions } from '../../../redux/selectors/appSelectors';
+
+const QuizPrevArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <div className={cn(styles.quizSlider__prev_arrow)} onClick={onClick}>
+      Back
+    </div>
+  );
+};
 
 const QuizNextArrow = (props: any) => {
-  const { className, style, onClick } = props;
+  const { onClick } = props;
   return (
-    <div
-      className={className}
-      style={{ ...style, display: 'block', background: 'red' }}
-      onClick={onClick}
-    />
-  );
-};
-const QuizPrevArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: 'block', background: 'green' }}
-      onClick={onClick}
-    />
+    <div className={cn(styles.quizSlider__next_arrow)} onClick={onClick}>
+      Forward
+    </div>
   );
 };
 
-const QuizSlider: React.FC<ownProps> = ({ handleSetVisibleSliderSection }) => {
+const QuizSlider: React.FC<MapStatePropsType & ownProps> = ({
+  handleSetVisibleSliderSection,
+  quizQuestions,
+}) => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
   const handleSlickDotsClassname = React.useCallback(() => {
     let sliderDots: NodeListOf<Element> = document.querySelectorAll(
-      '.slick-dots > li.slick-active',
+      '.slick-dots > li.slick-active ~ li',
     );
     for (let i = 0; i < sliderDots.length; i++) {
-      let prevItem = sliderDots[i].previousElementSibling;
-      prevItem && prevItem.classList.add('visited');
+      sliderDots[i].classList.add('non_visited');
     }
   }, []);
 
@@ -51,8 +54,8 @@ const QuizSlider: React.FC<ownProps> = ({ handleSetVisibleSliderSection }) => {
     pauseOnHover: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <QuizPrevArrow />,
-    prevArrow: <QuizNextArrow />,
+    prevArrow: <QuizPrevArrow />,
+    nextArrow: <QuizNextArrow />,
     beforeChange: (currentSlide: any, nextSlide: any) => {},
     afterChange: (index: any) => {
       handleAfterChange(index);
@@ -60,31 +63,32 @@ const QuizSlider: React.FC<ownProps> = ({ handleSetVisibleSliderSection }) => {
     },
   };
   return (
-    <div>
+    <div className={cn(styles.quizSlider__wrapper)}>
       <Slider {...settings} className={cn(styles.quizSlider)}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {quizQuestions.map((item, index) => {
+          const { id, question, answers } = item;
+          return (
+            <div className={cn(styles.quizSlider__item)} key={`${id}_${index}`}>
+              <div className={cn(styles.item__question)}>
+                <p>{question}</p>
+              </div>
+              <div className={cn(styles.item__answers)}>
+                {answers.map((elem, index) => {
+                  const { text, correct } = elem;
+                  return (
+                    <div className={cn(styles.answers)} key={`${index}_${text}`}>
+                      <p>{text}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </Slider>
-
-      <div>
+      <div className={cn(styles.quizSlider__slider_count)}>
         {' '}
-        {currentSlide + 1} / {10}{' '}
+        {currentSlide + 1} / {quizQuestions.length}{' '}
       </div>
     </div>
   );
@@ -94,4 +98,12 @@ type ownProps = {
   handleSetVisibleSliderSection: (value: boolean) => void;
 };
 
-export default QuizSlider;
+const mapStateToProps = (state: AppStateType) => ({
+  quizQuestions: getQuizQuestions(state),
+});
+
+type MapStatePropsType = ReturnType<typeof mapStateToProps>;
+
+export default compose<React.ComponentType>(
+  connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps, {}),
+)(QuizSlider);

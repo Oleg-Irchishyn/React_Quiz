@@ -1,19 +1,29 @@
 @import "../variables.scss";
 
-.inner_paging__info {
+.quizSlider__wrapper {
     position: relative;
-    font-size: 20px;
-    color: red;
 }
 
 .quizSlider {
     position: relative;
 }
 
-.activity {
-    background: green;
+.quizSlider__slider_count {
+    position: relative;
+    font-size: 20px;
+    color: red;
 }
 
-.hactivity {
-    background: cyan;
+.quizSlider__prev_arrow {
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 100%;
+}
+
+.quizSlider__next_arrow {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    top: 100%;
 }
