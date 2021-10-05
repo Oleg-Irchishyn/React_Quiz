@@ -43,7 +43,31 @@ body {
     width: 100%;
   }
 
+  .slick-dots {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    bottom: 0;
+    margin: 30px auto 0 auto;
+    max-width: 50%;
+    width: 100%;
+  }
+  .slick-dots li.slick-active button:before,
+  .slick-dots li button::before {
+    opacity: 1;
+    background: $color-slick-button;
+    width: 20px;
+    height: 4px;
+    content: "";
+    transform: translate(-50%, -50%) !important;
+    top: 50% !important;
+    left: 50% !important;
+  }
+  .slick-dots li.slick-active button:before {
+    background: $color-hovered;
+  }
+
   .slick-list {
-    padding: 160px 0 0 0 !important;
+    padding: 120px 0 0 0 !important;
   }
 }

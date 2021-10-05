@@ -33,15 +33,6 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
   ({ handleSetVisibleSliderSection, quizQuestions }) => {
     const [currentSlide, setCurrentSlide] = React.useState(0);
 
-    const handleSlickDotsClassname = React.useCallback(() => {
-      let sliderDots: NodeListOf<Element> = document.querySelectorAll(
-        '.slick-dots > li.slick-active ~ li',
-      );
-      for (let i = 0; i < sliderDots.length; i++) {
-        sliderDots[i].classList.add('non_visited');
-      }
-    }, []);
-
     const handleAfterChange = React.useCallback((index) => {
       setCurrentSlide(index);
     }, []);
@@ -56,9 +47,9 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
       slidesToScroll: 1,
       prevArrow: <QuizPrevArrow />,
       nextArrow: <QuizNextArrow />,
+      beforeChange: function (currentSlide: any, nextSlide: any) {},
       afterChange: (index: number) => {
         handleAfterChange(index);
-        handleSlickDotsClassname();
       },
     };
     return (

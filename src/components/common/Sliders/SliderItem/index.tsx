@@ -16,8 +16,11 @@ const QuizSliderItem: React.FC<ownProps> = React.memo(({ question, answers, imgU
         {answers.map((elem, index) => {
           const { text, correct } = elem;
           return (
-            <div className={cn(styles.answers)} key={`${index}_${text}`}>
-              <p>{text}</p>
+            <div className={cn(styles.answer)} key={`${index}_${text}`}>
+              <p>
+                <i>{index + 1}</i>
+                <span>{text}</span>
+              </p>
             </div>
           );
         })}
