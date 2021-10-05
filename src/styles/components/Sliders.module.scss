@@ -2,10 +2,37 @@
 
 .quizSlider__wrapper {
     position: relative;
+    height: 100%;
+    padding: 125px 0 125px 0;
+
+    .quizSlider__descr {
+        position: relative;
+        font-family: $font-secondary;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+        text-align: center;
+        text-transform: uppercase;
+        color: $color-white;
+        margin: 0;
+    }
+    .quizSlider__title {
+        position: relative;
+        font-family: $font-main;
+        font-weight: 900;
+        font-size: 64px;
+        line-height: 90px;
+        text-align: center;
+        color: $color-white;
+        margin: 0;
+    }
 }
 
 .quizSlider {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .quizSlider__slider_count {

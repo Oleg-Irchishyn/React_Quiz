@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../styles/components/StartScreen.module.scss';
 import cn from 'classnames';
 
-const StartScreen: React.FC<ownProps> = ({ handleSetVisibleSection }) => {
+const StartScreen: React.FC<ownProps> = React.memo(({ handleSetVisibleSection }) => {
   return (
     <div className={cn(styles.startScreen)}>
       <div className={cn(styles.startScreen__content)}>
@@ -20,7 +20,7 @@ const StartScreen: React.FC<ownProps> = ({ handleSetVisibleSection }) => {
       </div>
     </div>
   );
-};
+});
 
 type ownProps = {
   handleSetVisibleSection: (value: boolean) => void;

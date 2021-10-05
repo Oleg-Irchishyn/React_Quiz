@@ -2,6 +2,7 @@
     "quizQuestions": [
       {
         "id": 0,
+        "imgUrl": "./images/slider-icons/1.png",
         "question": "Up to date, there are many casino streamers,but the only person who knows slot games better than many others and is called “a casino philosopher.”Who is this experienced gambler?",
         "answers": [
             {
@@ -23,6 +24,7 @@
       },
       {
         "id": 1,
+        "imgUrl": "./images/slider-icons/2.png",
         "question": "Many people who are watching casino streams are aware of Roshtein. But a few of them know his real name. So, what is his real name?",
         "answers": [
             {
@@ -44,6 +46,7 @@
       },
       {
         "id": 2,
+        "imgUrl": "./images/slider-icons/3.png",
         "question": "One of the most influential streamers on Twitch had started broadcasting Slots but finished this hobby because of gambling addiction. Who is this influential streamer?",
         "answers": [
             {
@@ -65,6 +68,7 @@
       },
       {
         "id": 3,
+        "imgUrl": "./images/slider-icons/4.png",
         "question": "In September 2021, this casino streamer finally got his reward and hit the slot for over 2 million dollars. The name of the streamer is Trainwrecks. But in what casino game did he meet such incredible luck?",
         "answers": [
             {
@@ -86,6 +90,7 @@
       },
       {
         "id": 4,
+        "imgUrl": "./images/slider-icons/5.png",
         "question": "The field of casino streaming is a highly competitive environment, and most of the top places are placed by male representatives, but you can also notice streams made by females. What is the most popular channel on Twitch with such a beautiful representative from the list?",
         "answers": [
             {
@@ -107,6 +112,7 @@
       },
       {
         "id": 5,
+        "imgUrl": "./images/slider-icons/6.png",
         "question": "While most casino streamers prefer to spin the reels and make insane winnings alone, this couple stream all the games together. Could you remember the name of this channel? A slight hint – this couple from French.",
         "answers": [
             {
@@ -128,6 +134,7 @@
       },
       {
         "id": 6,
+        "imgUrl": "./images/slider-icons/7.png",
         "question": "If you check our digest of TOP 10 biggest online slot wins, you can notice that some casino streamers made millions of dollars in online slots, and all of these moments happened because of one thing. What is the secret of such crazy fortune?",
         "answers": [
             {
@@ -149,6 +156,7 @@
       },
       {
         "id": 7,
+        "imgUrl": "./images/slider-icons/8.png",
         "question": "Do you know this casino streamer who is a high-roller player (placing a bet of 100 dollars and higher) from this list?",
         "answers": [
             {
@@ -170,6 +178,7 @@
       },
       {
         "id": 8,
+        "imgUrl": "./images/slider-icons/9.png",
         "question": "Of course, there are always people who will criticize gambling and casino streamers. Recently, a group of popular streamers on Twitch started a radical wave against gambling and its potential danger for a young generation. This wave caused…",
         "answers": [
             {
@@ -191,6 +200,7 @@
       },
       {
         "id": 9,
+        "imgUrl": "./images/slider-icons/10.png",
         "question": "And what did this new Twitch policy do for casino streamers and the gambling industry?",
         "answers": [
             {
@@ -214,24 +224,28 @@
     "quizResults": [
         {
             "id": 0,
+            "imgUrl": "./images/results-icons/low-score.png",
             "points": "0-30",
             "title": "Casino Streamers? Who are these people?",
             "text": "You probably came to this page by accident. Or maybe you are just starting to get acquainted with the gambling and streaming enterprising world. Either way, you still have a lot to learn. Go to our website, read some helpful articles, and we guarantee – you will catch up fast."
         },
         {
             "id": 1,
+            "imgUrl": "./images/results-icons/middle-score.png",
             "points": "40-60",
             "title": "Newbie",
             "text": "It looks like you are just starting to get to know the streaming business, but you are already getting to grips with the key people and events. You have great potential and an apparent interest in gambling. Watch more casino streams, read our regular digest with the biggest online slot wins, and you will have all the chances to turn from a newcomer into a compulsive gambler with a huge fan base."
         },
         {
             "id": 2,
+            "imgUrl": "./images/results-icons/high-score.png",
             "points": "70-80",
             "title": "Professional streamer!",
             "text": "You know your way around the gambling scene almost excellently. And you know not only about the highest wins but also what happens during live broadcasts by popular casino streamers. You can easily tell the difference between a fake streamer and a reliable one; a streamer who loves hype and a genuinely skillful gambler. You can make your way to the top of the gambling Olympus and become a professional streamer with a bit of effort."
         },
         {
             "id": 3,
+            "imgUrl": "./images/results-icons/top-score.png",
             "points": "90-100",
             "title": "Rising Streaming Star",
             "text": "You know more about streamers than the popular casino streamers themselves do. You do not need to be told what is going on on the gambling and streaming scene. Because you are aware of everything: who, when, how much, under which circumstances, and in what slot win a lot of money or lose everything. We are sure that you are a rising star of the streaming and gambling scene and a future honorable competitor for Roshtein, Xposed, and TrainwrecksTV. Follow your dream and make crazy wins!"

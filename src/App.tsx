@@ -64,6 +64,8 @@ type ownProps = {
 };
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, { initializeApp }),
+  connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+    initializeApp,
+  }),
   withRouter,
 )(App);
