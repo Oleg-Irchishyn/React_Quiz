@@ -1,13 +1,15 @@
+import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
+
 export type quizQuestionType = {
   id: string | number;
-  imgUrl: HTMLImageElement | string | File;
+  imgUrl: any;
   question: string;
   answers: Array<answerType>;
 };
 
 export type quizResults = {
   id: string | number;
-  imgUrl: HTMLImageElement | string | File;
+  imgUrl: any;
   points: string;
   title: string;
   text: string;

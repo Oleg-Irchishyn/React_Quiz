@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { DetailedHTMLProps } from 'react';
 import Slider from 'react-slick';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -79,8 +79,7 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
           })}
         </Slider>
         <div className={cn(styles.quizSlider__slider_count)}>
-          {' '}
-          {currentSlide + 1} / {quizQuestions.length}{' '}
+          <i>{currentSlide + 1}</i> <b>/</b> <i>{quizQuestions.length}</i>
         </div>
       </div>
     );
@@ -91,7 +90,7 @@ type ownProps = {
   handleSetVisibleSliderSection: (value: boolean) => void;
   question: string;
   answers: Array<answerType>;
-  imgUrl: HTMLImageElement | string | File;
+  imgUrl: any;
 };
 
 const mapStateToProps = (state: AppStateType) => ({

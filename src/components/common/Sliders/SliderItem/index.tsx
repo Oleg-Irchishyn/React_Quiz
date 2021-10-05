@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 import styles from './../../../../styles/components/Sliders.module.scss';
 import cn from 'classnames';
 import { answerType } from '../../../../redux/types/types';
@@ -6,7 +6,9 @@ import { answerType } from '../../../../redux/types/types';
 const QuizSliderItem: React.FC<ownProps> = React.memo(({ question, answers, imgUrl }) => {
   return (
     <div className={cn(styles.quizSlider__item)}>
-      <div className={cn(styles.item__img)}>{imgUrl}</div>
+      <div className={cn(styles.item__img)}>
+        <img src={imgUrl} />
+      </div>
       <div className={cn(styles.item__question)}>
         <p>{question}</p>
       </div>
@@ -27,7 +29,7 @@ const QuizSliderItem: React.FC<ownProps> = React.memo(({ question, answers, imgU
 type ownProps = {
   question: string;
   answers: Array<answerType>;
-  imgUrl: HTMLImageElement | string | File;
+  imgUrl: any;
 };
 
 export default QuizSliderItem;
