@@ -51,6 +51,14 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
       afterChange: (index: number) => {
         handleAfterChange(index);
       },
+      responsive: [
+        {
+          breakpoint: 767,
+          settings: {
+            dots: false,
+          },
+        },
+      ],
     };
     return (
       <div className={cn(styles.quizSlider__wrapper)}>

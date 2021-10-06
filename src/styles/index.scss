@@ -51,6 +51,10 @@ body {
     margin: 30px auto 0 auto;
     max-width: 50%;
     width: 100%;
+
+    @include md-devices {
+      max-width: 40%;
+    }
   }
   .slick-dots li.slick-active button:before,
   .slick-dots li button::before {
@@ -69,5 +73,8 @@ body {
 
   .slick-list {
     padding: 120px 0 0 0 !important;
+    @include sm-devices {
+      padding: 120px 0 40px 0 !important;
+    }
   }
 }

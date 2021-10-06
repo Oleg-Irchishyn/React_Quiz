@@ -5,7 +5,7 @@
     width: 100%;
     max-width: 100%;
     height: 100%;
-    padding: 125px 60px 125px 60px;
+    padding: 30px 60px 30px 60px;
     margin: 0 auto;
 
     @include xl-devices {
@@ -25,18 +25,30 @@
     }
     @include xs-devices {
         max-width: 300px;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .quizSlider__descr {
         position: relative;
         font-family: $font-secondary;
         font-weight: 400;
-        font-size: 18px;
-        line-height: 25px;
+        font-size: 21px;
+        line-height: 30px;
         text-align: center;
         text-transform: uppercase;
         color: $color-white;
         margin: 0;
+
+        @include md-devices {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        @include sm-devices {
+            font-size: 15px;
+            line-height: 21px;
+        }
     }
     .quizSlider__title {
         position: relative;
@@ -47,6 +59,14 @@
         text-align: center;
         color: $color-white;
         margin: 0;
+        @include md-devices {
+            font-size: 28px;
+            line-height: 39px;
+        }
+        @include sm-devices {
+            font-size: 34px;
+            line-height: 41px;
+        }
     }
     .quizSlider__slider_count {
         display: flex;
@@ -60,11 +80,23 @@
         border-radius: 3px;
         background: $color-white;
         position: absolute;
-        top: calc(0px + 42.5%);
+        top: calc(0% + 415px);
         left: 50%;
         transform: translate(-50%, -50%);
         box-sizing: border-box;
         z-index: 25;
+
+        @include lg-devices {
+            top: calc(0% + 415px);
+        }
+
+        @include md-devices {
+            top: calc(0% + 355px);
+        }
+
+        @include sm-devices {
+            top: calc(0% + 397px);
+        }
         i {
             font-size: 14px;
             font-style: normal;
@@ -145,6 +177,9 @@
             margin: 100px auto 40px auto;
             font-family: $font-main;
             box-sizing: border-box;
+            @include sm-devices {
+                padding: 80px 10px 27px 10px;
+            }
             p {
                 font-family: inherit;
                 font-weight: 400;
@@ -153,6 +188,10 @@
                 text-align: center;
                 color: #1a2a3b;
                 word-break: break-word;
+                @include sm-devices {
+                    font-size: 16px;
+                    line-height: normal;
+                }
             }
         }
         .item__answers {
@@ -201,6 +240,10 @@
                         font-style: normal;
                         line-height: normal;
                         text-align: center;
+
+                        @include sm-devices {
+                            font-size: 20px;
+                        }
                     }
                     span {
                         font-family: $font-secondary;
@@ -210,6 +253,10 @@
                         text-align: left;
                         color: $color-black;
                         flex: 1;
+                        @include sm-devices {
+                            font-size: 16px;
+                            padding-left: 10px;
+                        }
                     }
                 }
             }
@@ -220,13 +267,104 @@
 .quizSlider__prev_arrow {
     position: absolute;
     z-index: 100;
-    left: 0;
-    top: 100%;
+    left: calc(0px + 10%);
+    top: calc(100% - 30px);
+    z-index: 50;
+    border: 1px solid $btn-back-bg;
+    border-radius: 4px;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: $font-main;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $btn-back-bg;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s ease;
+    &:hover {
+        @media (min-width: 992px) {
+            transform: translateX(-10px);
+            transition: 0.2s ease;
+        }
+    }
+    @include xl-devices {
+        max-width: 172px;
+        min-height: 40px;
+    }
+
+    @include lg-devices {
+        max-width: 144px;
+        min-height: 34px;
+    }
+
+    @include md-devices {
+        max-width: 107px;
+        min-height: 29px;
+    }
+    @include sm-devices {
+        max-width: 84px;
+        min-height: 40px;
+        top: 100%;
+    }
 }
 
 .quizSlider__next_arrow {
     position: absolute;
     z-index: 100;
-    right: 0;
-    top: 100%;
+    right: calc(0px + 10%);
+    top: calc(100% - 30px);
+    z-index: 50;
+    border: 1px solid $btn-bg;
+    border-radius: 4px;
+    background: $btn-bg;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: $font-main;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-black;
+    width: 100%;
+    cursor: pointer;
+    transform: none;
+    transition: 0.2s ease;
+    &:hover {
+        @media (min-width: 992px) {
+            transform: translateX(10px);
+            transition: 0.2s ease;
+        }
+    }
+    @include xl-devices {
+        max-width: 172px;
+        min-height: 40px;
+    }
+
+    @include lg-devices {
+        max-width: 144px;
+        min-height: 34px;
+    }
+
+    @include md-devices {
+        max-width: 107px;
+        min-height: 29px;
+    }
+    @include sm-devices {
+        max-width: 84px;
+        min-height: 40px;
+        top: 100%;
+    }
 }

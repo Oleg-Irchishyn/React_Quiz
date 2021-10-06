@@ -15,6 +15,14 @@
         width: 100%;
         padding: 60px;
 
+        @include landscape-orientation {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: none;
+            margin: 30px auto 30px auto;
+        }
+
         @include xl-devices {
             max-width: 954px;
         }
@@ -31,6 +39,7 @@
         }
         @include xs-devices {
             max-width: 300px;
+            padding: 30px 0 30px 0;
         }
         .content__title {
             font-family: $font-main;
@@ -48,6 +57,7 @@
             @include sm-devices {
                 font-size: 34px;
                 line-height: 41px;
+                padding: 0 15px 30px 15px;
             }
         }
         .content__text {
@@ -65,6 +75,10 @@
             @include md-devices {
                 font-size: 14px;
                 line-height: 18px;
+            }
+
+            @include sm-devices {
+                padding: 0 15px 30px 15px;
             }
         }
         .content__btn {
