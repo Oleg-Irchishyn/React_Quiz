@@ -9,6 +9,10 @@ export const getQuizQuestions = (state: AppStateType) => {
   return state.app.quizQuestions;
 };
 
+export const getQuizAnswers = (state: AppStateType) => {
+  return state.app.quizAnswers;
+};
+
 /*Selectors, created by reselect library*/
 
 export const initializeAppSelector = createSelector(initializeApp, (initializations) => {

@@ -1,4 +1,4 @@
-import { quizQuestionType, quizResults } from './../types/types';
+import { quizQuestionType, quizResults, answerType } from './../types/types';
 import { ThunkDispatch } from 'redux-thunk';
 import { AppStateType, InferActionsTypes, BaseThunkType } from './../store';
 import { mainAPI } from '../../api/api';
@@ -6,6 +6,7 @@ import { FormAction } from 'redux-form';
 const INITIALIZED_SUCCESS = 'quiz/app/INITIALIZED_SUCCESS';
 const SET_QUIZ_QUESTIONS = 'quiz/app/SET_QUIZ_QUESTIONS';
 const SET_QUIZ_RESULTS = 'quiz/app/SET_QUIZ_RESULTS';
+const SET_QUIZ_ANSWERS = 'quiz/app/SET_QUIZ_ANSWERS';
 const SET_IS_LOADED = 'quiz/app/SET_IS_LOADING';
 
 let initialState = {
@@ -13,6 +14,7 @@ let initialState = {
   isLoading: false as boolean,
   quizQuestions: [] as Array<quizQuestionType>,
   quizResults: [] as Array<quizResults>,
+  quizAnswers: [] as Array<answerType>,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
@@ -39,6 +41,12 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         isLoading: true,
         quizResults: action.results,
       };
+    case SET_QUIZ_ANSWERS: {
+      return {
+        ...state,
+        quizAnswers: [...state.quizAnswers, action.answer],
+      };
+    }
     default:
       return state;
   }
@@ -50,6 +58,7 @@ export const actions = {
   setQuizQustions: (questions: Array<quizQuestionType>) =>
     ({ type: SET_QUIZ_QUESTIONS, questions } as const),
   setQuizResults: (results: Array<quizResults>) => ({ type: SET_QUIZ_RESULTS, results } as const),
+  setQuizAnswers: (answer: answerType) => ({ type: SET_QUIZ_ANSWERS, answer } as const),
 };
 
 export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {

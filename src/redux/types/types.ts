@@ -8,7 +8,6 @@ export type quizQuestionType = {
 };
 
 export type quizResults = {
-  id: string | number;
   imgUrl: any;
   points: string;
   title: string;

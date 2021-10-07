@@ -202,16 +202,44 @@
             justify-content: flex-start;
             width: 100%;
             box-sizing: border-box;
+            &.selected {
+                .answer {
+                    pointer-events: none;
+                }
+            }
             .answer {
                 margin: 0;
                 background: $color-white;
                 border-radius: 10px;
+                border: 2px solid transparent;
                 padding: 10px 20px 10px 15px;
                 width: 100%;
                 transform: none;
                 transition: 0.2s ease;
                 box-sizing: border-box;
                 cursor: pointer;
+                &.correct {
+                    border: 2px solid $color-correct;
+                    p {
+                        i {
+                            color: $color-correct;
+                        }
+                        span {
+                            color: $color-correct;
+                        }
+                    }
+                }
+                &.wrong {
+                    border: 2px solid $color-wrong;
+                    p {
+                        i {
+                            color: $color-wrong;
+                        }
+                        span {
+                            color: $color-wrong;
+                        }
+                    }
+                }
                 &:not(:last-of-type) {
                     margin: 0 0 20px 0;
                 }
@@ -220,6 +248,16 @@
                     @media (min-width: 992px) {
                         transform: perspective(2000px) translateZ(100px);
                         transition: 0.2s ease;
+                        border: 2px solid $color-hovered;
+                        p {
+                            i {
+                                color: $color-hovered;
+                            }
+
+                            span {
+                                color: $color-hovered;
+                            }
+                        }
                     }
                 }
                 p {
@@ -234,7 +272,7 @@
                         font-family: $font-main;
                         max-width: 8%;
                         width: 100%;
-                        color: #ccd5de;
+                        color: $color-normal;
                         font-size: 26px;
                         font-weight: 600;
                         font-style: normal;

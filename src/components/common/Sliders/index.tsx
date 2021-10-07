@@ -21,10 +21,17 @@ const QuizPrevArrow = (props: any) => {
 };
 
 const QuizNextArrow = (props: any) => {
-  const { onClick } = props;
-  return (
+  const { onClick, currentSlide, quizQuestions, handleSetVisibleSliderSection } = props;
+
+  return Number(currentSlide) === quizQuestions.length - 1 ? (
+    <div
+      className={cn(styles.quizSlider__next_arrow)}
+      onClick={() => handleSetVisibleSliderSection(false)}>
+      Resluts
+    </div>
+  ) : (
     <div className={cn(styles.quizSlider__next_arrow)} onClick={onClick}>
-      Forward
+      Forwards
     </div>
   );
 };
@@ -46,7 +53,13 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
       slidesToShow: 1,
       slidesToScroll: 1,
       prevArrow: <QuizPrevArrow />,
-      nextArrow: <QuizNextArrow />,
+      nextArrow: (
+        <QuizNextArrow
+          currentSlide={currentSlide}
+          quizQuestions={quizQuestions}
+          handleSetVisibleSliderSection={handleSetVisibleSliderSection}
+        />
+      ),
       beforeChange: function (currentSlide: any, nextSlide: any) {},
       afterChange: (index: number) => {
         handleAfterChange(index);
@@ -66,15 +79,8 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
         <h1 className={cn(styles.quizSlider__title)}>IQ - test for a gambler</h1>
         <Slider {...settings} className={cn(styles.quizSlider)}>
           {quizQuestions.map((item, index) => {
-            const { id, question, answers, imgUrl } = item;
-            return (
-              <QuizSliderItem
-                key={`${id}_${index}`}
-                question={question}
-                answers={answers}
-                imgUrl={imgUrl}
-              />
-            );
+            const { id } = item;
+            return <QuizSliderItem key={`${id}_${index}`} {...item} />;
           })}
         </Slider>
         <div className={cn(styles.quizSlider__slider_count)}>
