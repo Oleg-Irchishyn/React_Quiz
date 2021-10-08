@@ -84,7 +84,7 @@ const AddNewQuizForm: React.FC<InjectedFormProps<AddNewQuizFormValuesType, Props
                 'subscribe',
                 'checkbox',
                 Input,
-                [required],
+                [],
               )}
               <label htmlFor="subscribe">Subscribe to news updates</label>
             </div>
