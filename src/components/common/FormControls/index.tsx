@@ -7,7 +7,7 @@ import {
   WrappedFieldProps,
 } from 'redux-form';
 
-import { FiledValidatorType } from '../../../redux/utils/validators/validators';
+import { FiledValidatorType } from '../../../redux/utils/validators';
 
 type FormControlPropsType = {
   input: WrappedFieldInputProps;

@@ -31,7 +31,7 @@ const QuizNextArrow = (props: any) => {
     </div>
   ) : (
     <div className={cn(styles.quizSlider__next_arrow)} onClick={onClick}>
-      Forwards
+      Forward
     </div>
   );
 };

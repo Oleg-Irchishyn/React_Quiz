@@ -13,6 +13,10 @@ export const getQuizAnswers = (state: AppStateType) => {
   return state.app.quizAnswers;
 };
 
+export const getIsLoading = (state: AppStateType) => {
+  return state.app.isLoading;
+};
+
 /*Selectors, created by reselect library*/
 
 export const initializeAppSelector = createSelector(initializeApp, (initializations) => {

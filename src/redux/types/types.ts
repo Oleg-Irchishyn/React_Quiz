@@ -18,3 +18,11 @@ export type answerType = {
   text: string | number;
   correct: boolean;
 };
+
+export type quizFormType = {
+  id: string | number;
+  name: string | number;
+  email: string | number;
+  personalDataAccept: boolean;
+  subscribe: boolean;
+};

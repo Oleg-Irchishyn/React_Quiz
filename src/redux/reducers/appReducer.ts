@@ -1,4 +1,4 @@
-import { quizQuestionType, quizResults, answerType } from './../types/types';
+import { quizQuestionType, quizResults, answerType, quizFormType } from './../types/types';
 import { ThunkDispatch } from 'redux-thunk';
 import { AppStateType, InferActionsTypes, BaseThunkType } from './../store';
 import { mainAPI } from '../../api/api';
@@ -7,7 +7,9 @@ const INITIALIZED_SUCCESS = 'quiz/app/INITIALIZED_SUCCESS';
 const SET_QUIZ_QUESTIONS = 'quiz/app/SET_QUIZ_QUESTIONS';
 const SET_QUIZ_RESULTS = 'quiz/app/SET_QUIZ_RESULTS';
 const SET_QUIZ_ANSWERS = 'quiz/app/SET_QUIZ_ANSWERS';
+const SET_QUIZ_FORMS = 'quiz/app/SET_QUIZ_FORMS';
 const SET_IS_LOADED = 'quiz/app/SET_IS_LOADING';
+const ADD_QUIZ_FORM = 'quiz/app/ADD_QUIZ_FORM';
 
 let initialState = {
   initialized: false as boolean,
@@ -15,36 +17,55 @@ let initialState = {
   quizQuestions: [] as Array<quizQuestionType>,
   quizResults: [] as Array<quizResults>,
   quizAnswers: [] as Array<answerType>,
+  quizForms: [] as Array<quizFormType>,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
-    case INITIALIZED_SUCCESS:
+    case INITIALIZED_SUCCESS: {
       return {
         ...state,
         initialized: true,
       };
-    case SET_IS_LOADED:
+    }
+    case SET_IS_LOADED: {
       return {
         ...state,
         isLoading: action.payload,
       };
-    case SET_QUIZ_QUESTIONS:
+    }
+    case SET_QUIZ_QUESTIONS: {
       return {
         ...state,
         isLoading: true,
         quizQuestions: action.questions,
       };
-    case SET_QUIZ_RESULTS:
+    }
+    case SET_QUIZ_RESULTS: {
       return {
         ...state,
         isLoading: true,
         quizResults: action.results,
       };
+    }
+    case SET_QUIZ_FORMS: {
+      return {
+        ...state,
+        isLoading: true,
+        quizForms: action.forms,
+      };
+    }
     case SET_QUIZ_ANSWERS: {
       return {
         ...state,
         quizAnswers: [...state.quizAnswers, action.answer],
+      };
+    }
+    case ADD_QUIZ_FORM: {
+      return {
+        ...state,
+        isLoading: true,
+        quizForms: [...state.quizForms, action.obj],
       };
     }
     default:
@@ -59,6 +80,8 @@ export const actions = {
     ({ type: SET_QUIZ_QUESTIONS, questions } as const),
   setQuizResults: (results: Array<quizResults>) => ({ type: SET_QUIZ_RESULTS, results } as const),
   setQuizAnswers: (answer: answerType) => ({ type: SET_QUIZ_ANSWERS, answer } as const),
+  setQuizForms: (forms: Array<quizFormType>) => ({ type: SET_QUIZ_FORMS, forms } as const),
+  addQuizForm: (obj: quizFormType) => ({ type: ADD_QUIZ_FORM, obj } as const),
 };
 
 export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
@@ -83,8 +106,37 @@ export const setQuizResultsSuccess = (): ThunkType => async (dispatch: ThunkDisp
   }
 };
 
+export const setQuizFormsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+  try {
+    let data = await mainAPI.getQuizForms();
+    dispatch(actions.setQuizForms(data));
+  } catch (err) {
+    throw new Error(`Promise has not been resolved properly`);
+  } finally {
+    dispatch(actions.setIsLoaded(false));
+  }
+};
+
+export const sendQuizFormSuccess =
+  (obj: quizFormType): ThunkType =>
+  async (dispatch: ThunkDispatchType) => {
+    const { id, name, email, personalDataAccept, subscribe } = obj;
+    try {
+      let data = await mainAPI.sendQuizForm(id, name, email, personalDataAccept, subscribe);
+      dispatch(actions.addQuizForm(data));
+    } catch (err) {
+      throw new Error(`Promise has not been resolved properly`);
+    } finally {
+      dispatch(actions.setIsLoaded(false));
+    }
+  };
+
 export const initializeApp = () => (dispatch: ThunkDispatchType) => {
-  let promises = [dispatch(setQuizQustionsSuccess()), dispatch(setQuizResultsSuccess())];
+  let promises = [
+    dispatch(setQuizQustionsSuccess()),
+    dispatch(setQuizResultsSuccess()),
+    dispatch(setQuizFormsSuccess()),
+  ];
   Promise.all([promises]).then(() => {
     dispatch(actions.initializedSuccess());
   });
