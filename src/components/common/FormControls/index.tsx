@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { HTMLInputTypeAttribute, ReactNode } from 'react';
 import styles from '../../../styles/components/FormControls.module.scss';
 import {
   Field,
@@ -48,8 +48,10 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
 };
 
 export function createField<FormKeysType extends string>(
+  id: string | number | undefined,
   placeholder: string | undefined,
   name: FormKeysType,
+  type: HTMLInputTypeAttribute | undefined,
   component: React.FC<WrappedFieldProps>,
   valiadtors: Array<FiledValidatorType>,
   props = {},
@@ -58,8 +60,10 @@ export function createField<FormKeysType extends string>(
   return (
     <div>
       <Field
+        id={id}
         placeholder={placeholder}
         name={name}
+        type={type}
         component={component}
         validate={valiadtors}
         {...props}

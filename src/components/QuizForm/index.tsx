@@ -6,14 +6,23 @@ import { required } from '../../redux/utils/validators/';
 import { Field, FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { Input, createField } from '../../components/common/FormControls';
 import { AppStateType } from '../../redux/store';
-import { getIsLoading } from '../../redux/selectors/appSelectors';
+import { getIsLoading, getQuizResultsScore } from '../../redux/selectors/appSelectors';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { sendQuizFormSuccess } from '../../redux/reducers/appReducer';
+import { actions, sendQuizFormSuccess } from '../../redux/reducers/appReducer';
 import { quizFormType } from '../../redux/types/types';
 
-const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
-  ({ isLoading, sendQuizFormSuccess }) => {
+const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
+  ({
+    quizResultsScore,
+    isLoading,
+    sendQuizFormSuccess,
+    handleSetVisibleFormSection,
+    calcQuizResultsScore,
+  }) => {
+    React.useEffect(() => {
+      calcQuizResultsScore();
+    }, []);
     const onSubmitForm = (values: AddNewQuizFormValuesType, dispatch: (T: FormAction) => void) => {
       const newQuizFormObj = {
         id: uuidv4(),
@@ -23,12 +32,15 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
         subscribe: values.subscribe,
       };
       sendQuizFormSuccess(newQuizFormObj);
+      handleSetVisibleFormSection(false);
     };
 
     return (
       <div className={cn(styles.quizForm)}>
         <div className={cn(styles.quizForm__caption)}>
-          <h2>You have gained {0} points</h2>
+          <h2>
+            You have gained {quizResultsScore && quizResultsScore > 0 ? quizResultsScore : 0} points
+          </h2>
           <p>
             Do you have an opprotunity to become a famous streamer? Find out your score right now!
           </p>
@@ -48,19 +60,32 @@ const AddNewQuizForm: React.FC<InjectedFormProps<AddNewQuizFormValuesType, Props
     return (
       <form className={cn(styles.quizForm__content)} onSubmit={handleSubmit}>
         <div className={cn(styles.content__top)}>
-          {createField<AddNewPostFormValuesTypeKeys>('name', 'name', Input, [required])}
-          {createField<AddNewPostFormValuesTypeKeys>('email', 'email', Input, [required])}
+          {createField<AddNewPostFormValuesTypeKeys>(uuidv4(), 'name', 'name', 'text', Input, [
+            required,
+          ])}
+          {createField<AddNewPostFormValuesTypeKeys>(uuidv4(), 'email', 'email', 'text', Input, [
+            required,
+          ])}
           <div>
             <div className={cn(styles.content__middle)}>
-              <Field
-                name="personalData"
-                id="personalData"
-                component={Input}
-                type="checkbox"
-                required
-              />
+              {createField<AddNewPostFormValuesTypeKeys>(
+                'personalData',
+                undefined,
+                'personalData',
+                'checkbox',
+                Input,
+                [required],
+              )}
               <label htmlFor="personalData">I consent to the processing of my personal data</label>
-              <Field name="subscribe" id="subscribe" component={Input} type="checkbox" required />
+
+              {createField<AddNewPostFormValuesTypeKeys>(
+                'subscribe',
+                undefined,
+                'subscribe',
+                'checkbox',
+                Input,
+                [required],
+              )}
               <label htmlFor="subscribe">Subscribe to news updates</label>
             </div>
           </div>
@@ -91,16 +116,23 @@ type AddNewPostFormValuesTypeKeys = Extract<keyof AddNewQuizFormValuesType, stri
 
 const mapStateToProps = (state: AppStateType) => ({
   isLoading: getIsLoading(state),
+  quizResultsScore: getQuizResultsScore(state),
 });
+
+type ownProps = {
+  handleSetVisibleFormSection: (value: boolean) => void;
+};
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 
 type MapDispatchPropsType = {
   sendQuizFormSuccess: (obj: quizFormType) => void;
+  calcQuizResultsScore: () => void;
 };
 
 export default compose<React.ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     sendQuizFormSuccess,
+    calcQuizResultsScore: actions.calcQuizResultsScore,
   }),
 )(QuizForm);

@@ -13,6 +13,10 @@ export const getQuizAnswers = (state: AppStateType) => {
   return state.app.quizAnswers;
 };
 
+export const getQuizResultsScore = (state: AppStateType) => {
+  return state.app.quizResultsScore;
+};
+
 export const getIsLoading = (state: AppStateType) => {
   return state.app.isLoading;
 };

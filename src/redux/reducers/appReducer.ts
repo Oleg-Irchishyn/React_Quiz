@@ -10,6 +10,7 @@ const SET_QUIZ_ANSWERS = 'quiz/app/SET_QUIZ_ANSWERS';
 const SET_QUIZ_FORMS = 'quiz/app/SET_QUIZ_FORMS';
 const SET_IS_LOADED = 'quiz/app/SET_IS_LOADING';
 const ADD_QUIZ_FORM = 'quiz/app/ADD_QUIZ_FORM';
+const CALC_QUIZ_RESULTS_SCORE = 'quiz/app/CALC_QUIZ_RESULTS_SCORE';
 
 let initialState = {
   initialized: false as boolean,
@@ -18,6 +19,7 @@ let initialState = {
   quizResults: [] as Array<quizResults>,
   quizAnswers: [] as Array<answerType>,
   quizForms: [] as Array<quizFormType>,
+  quizResultsScore: undefined as number | undefined,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
@@ -68,6 +70,16 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         quizForms: [...state.quizForms, action.obj],
       };
     }
+    case CALC_QUIZ_RESULTS_SCORE: {
+      const quizAnswersCorrectCount = state.quizAnswers.filter((item) => {
+        return item.correct === true;
+      });
+      const calcResultsScore = (100 * Number(quizAnswersCorrectCount.length)) / 10;
+      return {
+        ...state,
+        quizResultsScore: Math.ceil(calcResultsScore),
+      };
+    }
     default:
       return state;
   }
@@ -82,6 +94,7 @@ export const actions = {
   setQuizAnswers: (answer: answerType) => ({ type: SET_QUIZ_ANSWERS, answer } as const),
   setQuizForms: (forms: Array<quizFormType>) => ({ type: SET_QUIZ_FORMS, forms } as const),
   addQuizForm: (obj: quizFormType) => ({ type: ADD_QUIZ_FORM, obj } as const),
+  calcQuizResultsScore: () => ({ type: CALC_QUIZ_RESULTS_SCORE } as const),
 };
 
 export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {

@@ -219,24 +219,48 @@
                 box-sizing: border-box;
                 cursor: pointer;
                 &.correct {
+                    &:hover {
+                        @media (min-width: 992px) {
+                            p {
+                                i,
+                                span {
+                                    color: inherit;
+                                }
+                            }
+                            border: 2px solid $color-correct;
+                        }
+                    }
                     border: 2px solid $color-correct;
                     p {
+                        color: $color-correct;
                         i {
-                            color: $color-correct;
+                            color: inherit;
                         }
                         span {
-                            color: $color-correct;
+                            color: inherit;
                         }
                     }
                 }
                 &.wrong {
+                    &:hover {
+                        @media (min-width: 992px) {
+                            p {
+                                i,
+                                span {
+                                    color: inherit;
+                                }
+                            }
+                            border: 2px solid $color-wrong;
+                        }
+                    }
                     border: 2px solid $color-wrong;
                     p {
+                        color: $color-wrong;
                         i {
-                            color: $color-wrong;
+                            color: inherit;
                         }
                         span {
-                            color: $color-wrong;
+                            color: inherit;
                         }
                     }
                 }

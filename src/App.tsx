@@ -1,7 +1,5 @@
 import React from 'react';
-import { Dispatch, SetStateAction } from 'react';
 import styles from './styles/components/App.module.scss';
-import cn from 'classnames';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -13,7 +11,10 @@ import { StartScreen } from './components/';
 import { withSuspense } from './hoc/WithSuspense';
 
 const QuizSlider = React.lazy(() => import('./components/common/Sliders/'));
+const QuizForm = React.lazy(() => import('./components/QuizForm/'));
+
 const SuspendedQuizSlider = withSuspense(QuizSlider);
+const SuspendedQuizForm = withSuspense(QuizForm);
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, initialized }) => {
@@ -23,6 +24,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
 
     const [visibleStartSection, setVisibleStartSection] = React.useState<boolean>(true);
     const [visibleSliderSection, setVisibleSliderSection] = React.useState<boolean>(false);
+    const [visibleFormSection, setVisibleFormSection] = React.useState<boolean>(false);
 
     const handleSetVisibleSection = (value: boolean): void => {
       setVisibleStartSection(value);
@@ -31,6 +33,11 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
 
     const handleSetVisibleSliderSection = (value: boolean): void => {
       setVisibleSliderSection(value);
+      setVisibleFormSection(true);
+    };
+
+    const handleSetVisibleFormSection = (value: boolean): void => {
+      setVisibleFormSection(value);
     };
 
     if (!initialized) {
@@ -43,6 +50,10 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
         {visibleSliderSection && (
           //@ts-ignore
           <SuspendedQuizSlider handleSetVisibleSliderSection={handleSetVisibleSliderSection} />
+        )}
+        {visibleFormSection && (
+          //@ts-ignore
+          <SuspendedQuizForm handleSetVisibleFormSection={handleSetVisibleFormSection} />
         )}
       </div>
     );
@@ -61,6 +72,7 @@ type MapDispatchPropsType = {
 type ownProps = {
   handleSetVisibleSection: (value: boolean) => void;
   handleSetVisibleSliderSection: (value: boolean) => void;
+  handleSetVisibleFormSection: (value: boolean) => void;
 };
 
 export default compose<React.ComponentType>(
