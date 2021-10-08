@@ -74,10 +74,10 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
       const quizAnswersCorrectCount = state.quizAnswers.filter((item) => {
         return item.correct === true;
       });
-      const calcResultsScore = (100 * Number(quizAnswersCorrectCount.length)) / 10;
+      const calcResultsScore = Math.floor(100 / Number(quizAnswersCorrectCount.length));
       return {
         ...state,
-        quizResultsScore: Math.ceil(calcResultsScore),
+        quizResultsScore: calcResultsScore,
       };
     }
     default:
