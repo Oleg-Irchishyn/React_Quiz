@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, ReactNode } from 'react';
+import React, { HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from 'react';
 import styles from '../../../styles/components/FormControls.module.scss';
 import {
   Field,
@@ -24,7 +24,7 @@ const FormControl: React.FC<FormControlPropsType> = ({
   return (
     <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
       <div>{children}</div>
-      {hasError && <span>"{error}</span>}
+      {hasError && <span>{error}</span>}
     </div>
   );
 };
@@ -33,7 +33,7 @@ export const Textarea: React.FC<WrappedFieldProps> = (props) => {
   const { input, meta, ...restProps } = props;
   return (
     <FormControl {...props}>
-      <textarea {...input} {...restProps} />
+      <textarea {...input} {...restProps} autoComplete="off" />
     </FormControl>
   );
 };
@@ -42,7 +42,7 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
   const { input, meta, ...restProps } = props;
   return (
     <FormControl {...props}>
-      <input {...input} {...restProps} />
+      <input {...input} {...restProps} autoComplete="off" />
     </FormControl>
   );
 };

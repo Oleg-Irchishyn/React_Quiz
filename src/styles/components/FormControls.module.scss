@@ -1,12 +1,54 @@
 @import "../variables.scss";
 
+.formControl {
+  font-family: $font-stack;
+  width: 100%;
+  text-align: left;
+  div {
+    width: 100%;
+  }
+  input {
+    cursor: pointer;
+    &[type="text"] {
+      border: none;
+      border-bottom: 1px solid #ffffff;
+      font-size: 14px;
+      font-weight: 400;
+      color: $color-white;
+      padding: 0 0 5px 0;
+      width: 100%;
+      background: transparent;
+      outline: none;
+      margin: 0 auto 20px auto;
+      &:focus {
+        &::placeholder {
+          opacity: 0;
+          transition: 0.2s ease;
+        }
+      }
+      &::placeholder {
+        color: inherit;
+        font-size: inherit;
+        opacity: 1;
+        transition: 0.2s ease;
+      }
+    }
+    &[type="checkbox"] {
+      display: none;
+    }
+  }
+}
+
 .formControl.error input,
 .formControl.error textarea {
-  border: 2px $color-wrong solid;
+  border-bottom: 1px $color-wrong solid;
+  margin: 0 auto;
 }
 
 .formControl.error span {
+  display: inline-block;
   color: $color-wrong;
+  font-size: 14px;
 }
 
 .formSummaryError {
