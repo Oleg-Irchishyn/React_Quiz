@@ -4,9 +4,7 @@
   font-family: $font-stack;
   width: 100%;
   text-align: left;
-  div {
-    width: 100%;
-  }
+  margin: 0 auto 20px auto;
   input {
     cursor: pointer;
     &[type="text"] {
@@ -19,7 +17,6 @@
       width: 100%;
       background: transparent;
       outline: none;
-      margin: 0 auto 20px auto;
       &:focus {
         &::placeholder {
           opacity: 0;
@@ -36,13 +33,40 @@
     &[type="checkbox"] {
       display: none;
     }
+    &[type="checkbox"] + label {
+      position: relative;
+      font-size: 14px;
+      line-height: 17px;
+      font-weight: 400;
+      padding: 0 0 0 33px;
+      width: 100%;
+      text-align: left;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: calc(0% - 3px);
+        border: 1px solid $color-hovered;
+        width: 23px;
+        height: 23px;
+      }
+    }
+    &[type="checkbox"]:checked + label {
+      &::before {
+        content: "\2713";
+        font-size: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-weight: 400;
+        color: $color-hovered;
+      }
+    }
   }
 }
 
 .formControl.error input,
 .formControl.error textarea {
   border-bottom: 1px $color-wrong solid;
-  margin: 0 auto;
 }
 
 .formControl.error span {

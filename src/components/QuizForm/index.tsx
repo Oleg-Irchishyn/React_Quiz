@@ -3,8 +3,8 @@ import cn from 'classnames';
 import styles from '../../styles/components/QuizForm.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { required } from '../../redux/utils/validators/';
-import { Field, FormAction, InjectedFormProps, reduxForm } from 'redux-form';
-import { Input, createField } from '../../components/common/FormControls';
+import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
+import { createCheckbox, createInput } from '../../components/common/FormControls';
 import { AppStateType } from '../../redux/store';
 import { getIsLoading, getQuizResultsScore } from '../../redux/selectors/appSelectors';
 import { compose } from 'redux';
@@ -63,34 +63,28 @@ const AddNewQuizForm: React.FC<InjectedFormProps<AddNewQuizFormValuesType, Props
     return (
       <form className={cn(styles.quizForm__content)} onSubmit={handleSubmit}>
         <div className={cn(styles.content__top)}>
-          {createField<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', Input, [
-            required,
-          ])}
-          {createField<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', Input, [
+          {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', [required])}
+          {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', [
             required,
           ])}
         </div>
 
         <div className={cn(styles.content__middle)}>
-          {createField<AddNewPostFormValuesTypeKeys>(
+          {createCheckbox<AddNewPostFormValuesTypeKeys>(
             'personalData',
-            undefined,
             'personalData',
             'checkbox',
-            Input,
+            'I consent to the processing of my personal data',
             [required],
           )}
-          <label htmlFor="personalData">I consent to the processing of my personal data</label>
 
-          {createField<AddNewPostFormValuesTypeKeys>(
+          {createCheckbox<AddNewPostFormValuesTypeKeys>(
             'subscribe',
-            undefined,
             'subscribe',
             'checkbox',
-            Input,
+            'Subscribe to news updates',
             [],
           )}
-          <label htmlFor="subscribe">Subscribe to news updates</label>
         </div>
         <div className={cn(styles.content__bottom)}>
           <button disabled={isLoading}>Submit</button>

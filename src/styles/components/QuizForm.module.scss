@@ -114,27 +114,6 @@
             div {
                 width: 100%;
             }
-            label {
-                position: relative;
-                font-size: 14px;
-                line-height: 17px;
-                font-weight: 400;
-                padding: 0 0 0 33px;
-                width: 100%;
-                text-align: left;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    top: calc(0% - 3px);
-                    border: 1px solid $color-hovered;
-                    width: 23px;
-                    height: 23px;
-                }
-                &:not(:last-of-type) {
-                    margin: 10px 0 20px 0;
-                }
-            }
         }
     }
 }

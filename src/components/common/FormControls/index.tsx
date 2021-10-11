@@ -1,61 +1,43 @@
-import React, { HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from 'react';
+import React, { HTMLInputTypeAttribute, ReactNode } from 'react';
 import styles from '../../../styles/components/FormControls.module.scss';
-import {
-  Field,
-  WrappedFieldInputProps,
-  WrappedFieldMetaProps,
-  WrappedFieldProps,
-} from 'redux-form';
+import { Field, WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form';
 
 import { FiledValidatorType } from '../../../redux/utils/validators';
 
 type FormControlPropsType = {
   input: WrappedFieldInputProps;
   meta: WrappedFieldMetaProps;
-  children: ReactNode;
+  label?: string | undefined;
+  type: string | undefined;
+  placeholder: string | undefined;
+  id: string | undefined;
 };
 
-const FormControl: React.FC<FormControlPropsType> = ({
+const renderedInput: React.FC<FormControlPropsType> = ({
   input,
+  label,
+  type,
   meta: { touched, error },
-  children,
+  placeholder,
+  id,
 }) => {
   const hasError = touched && error;
   return (
     <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-      <div>{children}</div>
+      <input id={id} {...input} placeholder={placeholder} type={type} autoComplete="off" />
+      <label htmlFor={id}>{label}</label>
       {hasError && <span>{error}</span>}
     </div>
   );
 };
 
-export const Textarea: React.FC<WrappedFieldProps> = (props) => {
-  const { input, meta, ...restProps } = props;
-  return (
-    <FormControl {...props}>
-      <textarea {...input} {...restProps} autoComplete="off" />
-    </FormControl>
-  );
-};
-
-export const Input: React.FC<WrappedFieldProps> = (props) => {
-  const { input, meta, ...restProps } = props;
-  return (
-    <FormControl {...props}>
-      <input {...input} {...restProps} autoComplete="off" />
-    </FormControl>
-  );
-};
-
-export function createField<FormKeysType extends string>(
-  id: string | number | undefined,
+export function createInput<FormKeysType extends string>(
+  id: string | undefined,
   placeholder: string | undefined,
   name: FormKeysType,
   type: HTMLInputTypeAttribute | undefined,
-  component: React.FC<WrappedFieldProps>,
   valiadtors: Array<FiledValidatorType>,
   props = {},
-  text = '',
 ) {
   return (
     <div>
@@ -64,11 +46,33 @@ export function createField<FormKeysType extends string>(
         placeholder={placeholder}
         name={name}
         type={type}
-        component={component}
+        component={renderedInput}
         validate={valiadtors}
         {...props}
       />
-      {text}
+    </div>
+  );
+}
+
+export function createCheckbox<FormKeysType extends string>(
+  id: any,
+  name: FormKeysType,
+  type: HTMLInputTypeAttribute | undefined,
+  labelText: string | undefined,
+  valiadtors: Array<FiledValidatorType>,
+  props = {},
+) {
+  return (
+    <div>
+      <Field
+        id={id}
+        name={name}
+        type={type}
+        component={renderedInput}
+        label={labelText}
+        validate={valiadtors}
+        {...props}
+      />
     </div>
   );
 }
