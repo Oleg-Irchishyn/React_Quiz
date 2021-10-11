@@ -111,8 +111,53 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: flex-start;
+            margin: 0 0 20px 0;
             div {
                 width: 100%;
+            }
+        }
+
+        .content__bottom {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+
+            button {
+                position: relative;
+                margin: 0;
+                max-width: 160px;
+                width: 100%;
+                min-height: 39px;
+                background: $btn-bg;
+                border-radius: 4px;
+                font-family: $font-main;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 29px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: $color-black;
+                -webkit-appearance: none;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                box-shadow: none;
+                transform: none;
+                transition: 0.2s ease;
+                &:hover {
+                    @media (min-width: 992px) {
+                        transition: 0.2s ease;
+                        transform: translateX(10px);
+                        background: $color-white;
+                        color: $btn-bg;
+                    }
+                }
             }
         }
     }

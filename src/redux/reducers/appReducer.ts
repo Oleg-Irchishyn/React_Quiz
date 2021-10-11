@@ -133,9 +133,16 @@ export const setQuizFormsSuccess = (): ThunkType => async (dispatch: ThunkDispat
 export const sendQuizFormSuccess =
   (obj: quizFormType): ThunkType =>
   async (dispatch: ThunkDispatchType) => {
-    const { id, name, email, personalDataAccept, subscribe } = obj;
+    const { id, name, email, personalDataAccept, subscribe, totalScore } = obj;
     try {
-      let data = await mainAPI.sendQuizForm(id, name, email, personalDataAccept, subscribe);
+      let data = await mainAPI.sendQuizForm(
+        id,
+        name,
+        email,
+        personalDataAccept,
+        subscribe,
+        totalScore,
+      );
       dispatch(actions.addQuizForm(data));
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);

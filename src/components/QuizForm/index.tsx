@@ -30,6 +30,7 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = 
         email: values.email,
         personalDataAccept: values.personalData,
         subscribe: values.subscribe,
+        totalScore: quizResultsScore,
       };
       sendQuizFormSuccess(newQuizFormObj);
       handleSetVisibleFormSection(false);

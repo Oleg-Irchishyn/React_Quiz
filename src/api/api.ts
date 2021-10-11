@@ -28,9 +28,17 @@ export const mainAPI = {
     email: string | number,
     personalDataAccept: boolean,
     subscribe: boolean,
+    totalScore: number | undefined,
   ) => {
     return instance
-      .post<quizFormType>(`quizForms`, { id, name, email, personalDataAccept, subscribe })
+      .post<quizFormType>(`quizForms`, {
+        id,
+        name,
+        email,
+        personalDataAccept,
+        subscribe,
+        totalScore,
+      })
       .then((response) => {
         return response.data;
       });

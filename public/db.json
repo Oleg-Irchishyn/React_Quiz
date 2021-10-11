@@ -193,25 +193,12 @@
   ],
   "quizForms": [
     {
-      "id": "244a41dd-abad-434b-9c6f-e1b28a3c3967",
-      "name": "test",
-      "email": "test@test.com",
+      "id": "c3afbf2d-16fd-48fa-924e-5184878449af",
+      "name": "123",
+      "email": "test@test.com1",
       "personalDataAccept": true,
-      "subscribe": true
-    },
-    {
-      "id": "0226933a-15b9-4088-a31b-f56609b13aab",
-      "name": "gambler",
-      "email": "oleg.irchishyn91@gmail.com",
-      "personalDataAccept": true,
-      "subscribe": true
-    },
-    {
-      "id": "659d4d0f-5582-4dbb-90b3-e4dc84b6b981",
-      "name": "gambler",
-      "email": "jfj",
-      "personalDataAccept": true,
-      "subscribe": true
+      "subscribe": true,
+      "totalScore": 20
     }
   ],
   "quizResults": [

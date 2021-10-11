@@ -25,4 +25,5 @@ export type quizFormType = {
   email: string | number;
   personalDataAccept: boolean;
   subscribe: boolean;
+  totalScore: number | undefined;
 };
