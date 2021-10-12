@@ -1,8 +1,8 @@
 {
-  "name": "react-quiz-app",
+  "name": "react-iq-quiz-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://react-quiz-app.herokuapp.com",
+  "homepage": "https://react-iq-quiz-app.herokuapp.com",
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
