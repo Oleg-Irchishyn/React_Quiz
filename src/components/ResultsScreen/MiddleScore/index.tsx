@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from '../../../styles/components/ResultsScreen.module.scss';
 import cn from 'classnames';
 
-const LowScore: React.FC<ownProps> = React.memo(({ title, points, imgUrl, text }) => {
+const MiddleScore: React.FC<ownProps> = React.memo(({ title, points, imgUrl, text }) => {
   return (
     <div className={cn(styles.content__inner)}>
       <h2 className={cn(styles.content__title)}>{title}</h2>
@@ -30,4 +30,4 @@ type ownProps = {
   text: string;
 };
 
-export default LowScore;
+export default MiddleScore;
