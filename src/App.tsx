@@ -12,9 +12,11 @@ import { withSuspense } from './hoc/WithSuspense';
 
 const QuizSlider = React.lazy(() => import('./components/common/Sliders/'));
 const QuizForm = React.lazy(() => import('./components/QuizForm/'));
+const ResultsScreen = React.lazy(() => import('./components/ResultsScreen'));
 
 const SuspendedQuizSlider = withSuspense(QuizSlider);
 const SuspendedQuizForm = withSuspense(QuizForm);
+const SuspendedResultsScreen = withSuspense(ResultsScreen);
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, initialized }) => {
@@ -25,6 +27,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
     const [visibleStartSection, setVisibleStartSection] = React.useState<boolean>(true);
     const [visibleSliderSection, setVisibleSliderSection] = React.useState<boolean>(false);
     const [visibleFormSection, setVisibleFormSection] = React.useState<boolean>(false);
+    const [visibleResultsSection, setVisibleResultsSection] = React.useState<boolean>(false);
 
     const handleSetVisibleSection = (value: boolean): void => {
       setVisibleStartSection(value);
@@ -38,6 +41,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
 
     const handleSetVisibleFormSection = (value: boolean): void => {
       setVisibleFormSection(value);
+      setVisibleResultsSection(true);
     };
 
     if (!initialized) {
@@ -55,6 +59,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
           //@ts-ignore
           <SuspendedQuizForm handleSetVisibleFormSection={handleSetVisibleFormSection} />
         )}
+        {visibleResultsSection && <SuspendedResultsScreen />}
       </div>
     );
   },
