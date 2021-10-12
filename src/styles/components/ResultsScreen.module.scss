@@ -1,0 +1,157 @@
+@import "../variables.scss";
+
+.resultsScreen {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    &__content {
+        position: relative;
+
+        @include landscape-orientation {
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: none;
+            margin: 30px auto 30px auto;
+        }
+
+        @include xl-devices {
+            max-width: 954px;
+        }
+        @include lg-devices {
+            max-width: 770px;
+        }
+
+        @include md-devices {
+            max-width: 570px;
+        }
+        @include sm-devices {
+            max-width: 300px;
+            padding: 30px;
+        }
+        @include xs-devices {
+            padding: 30px 0 30px 0;
+        }
+
+        .content__inner {
+            position: relative;
+        }
+
+        .content__title {
+            font-family: $font-main;
+            font-weight: 900;
+            font-size: 64px;
+            line-height: 90px;
+            text-align: center;
+            color: $color-white;
+            margin: 0 auto;
+            padding: 0 0 30px 0;
+            width: 100%;
+            @include xl-devices {
+                max-width: 954px;
+            }
+            @include lg-devices {
+                max-width: 770px;
+            }
+            @include md-devices {
+                font-size: 28px;
+                line-height: 39px;
+                max-width: 570px;
+            }
+            @include sm-devices {
+                font-size: 34px;
+                line-height: 41px;
+                padding: 0 15px 30px 15px;
+                max-width: 300px;
+            }
+        }
+
+        .content__score {
+            font-family: $font-main;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 26px;
+            text-align: center;
+            color: $color-white;
+            padding: 0 0 30px 0;
+            margin: 0 auto;
+            width: 100%;
+            @include xl-devices {
+                max-width: 954px;
+            }
+            @include lg-devices {
+                font-size: 18px;
+                line-height: 22px;
+                max-width: 770px;
+            }
+            @include md-devices {
+                font-size: 14px;
+                line-height: 18px;
+                max-width: 570px;
+            }
+
+            @include sm-devices {
+                padding: 0 15px 30px 15px;
+                max-width: 300px;
+            }
+        }
+        .content__body {
+            position: relative;
+            background: $content-bg;
+            box-shadow: 0px 4px 20px rgba(28, 9, 69, 0.7);
+            border-radius: 10px;
+            width: 100%;
+            padding: 60px;
+
+            .body__img {
+                max-width: 154px;
+                min-height: 154px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        .content__btn {
+            position: relative;
+            margin: 0 auto;
+            max-width: 160px;
+            width: 100%;
+            min-height: 39px;
+            background: $btn-bg;
+            border-radius: 4px;
+            font-family: $font-main;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 29px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: $color-black;
+            -webkit-appearance: none;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            transform: none;
+            transition: 0.2s ease;
+            &:hover {
+                @media (min-width: 992px) {
+                    transition: 0.2s ease;
+                    transform: translateX(10px);
+                    background: $color-white;
+                    color: $btn-bg;
+                }
+            }
+        }
+    }
+}

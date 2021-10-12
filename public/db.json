@@ -192,79 +192,39 @@
     }
   ],
   "quizForms": [
-    {
-      "id": "c3afbf2d-16fd-48fa-924e-5184878449af",
-      "name": "123",
-      "email": "test@test.com1",
-      "personalDataAccept": true,
-      "subscribe": true,
-      "totalScore": 20
-    },
-    {
-      "id": "4ce09e95-78ce-4166-bd61-e8dcb011fc6c",
-      "name": "123",
-      "email": "test@test.com",
-      "personalDataAccept": true,
-      "subscribe": true,
-      "totalScore": 10
-    },
-    {
-      "id": "44721c55-da95-4441-8843-b0c1853e6c62",
-      "name": "1",
-      "email": "1",
-      "personalDataAccept": true,
-      "subscribe": true,
-      "totalScore": 10
-    },
-    {
-      "id": "8e065ceb-d246-4b10-89be-1dfcc7b6a34e",
-      "name": "2",
-      "email": "3",
-      "personalDataAccept": true,
-      "subscribe": true,
-      "totalScore": 0
-    },
-    {
-      "id": "03c2226c-b6df-4e36-8e0c-685844ff9cc3",
-      "name": "gag",
-      "email": "ga",
-      "personalDataAccept": true,
-      "subscribe": true,
-      "totalScore": 0
-    }
   ],
   "quizResults": [
     {
-      "lowScore": {
+        "name": "lowScore",
         "imgUrl": "./images/results-icons/low-score.png",
         "points": "0-30",
         "title": "Casino Streamers? Who are these people?",
-        "text": "You probably came to this page by accident. Or maybe you are just starting to get acquainted with the gambling and streaming enterprising world. Either way, you still have a lot to learn. Go to our website, read some helpful articles, and we guarantee – you will catch up fast."
-      }
+        "text": "You probably came to this page by accident. Or maybe you are just starting to get acquainted with the gambling and streaming enterprising world. Either way, you still have a lot to learn. Go to our website, read some helpful articles, and we guarantee – you will catch up fast." 
     },
-    {
-      "middleScore": {
+    
+     {
+       "name": "middleScore",
         "imgUrl": "./images/results-icons/middle-score.png",
         "points": "40-60",
         "title": "Newbie",
         "text": "It looks like you are just starting to get to know the streaming business, but you are already getting to grips with the key people and events. You have great potential and an apparent interest in gambling. Watch more casino streams, read our regular digest with the biggest online slot wins, and you will have all the chances to turn from a newcomer into a compulsive gambler with a huge fan base."
-      }
-    },
-    {
-      "highScore": {
+      },
+   
+    
+      {
+        "name": "highScore",
         "imgUrl": "./images/results-icons/high-score.png",
         "points": "70-80",
         "title": "Professional streamer!",
         "text": "You know your way around the gambling scene almost excellently. And you know not only about the highest wins but also what happens during live broadcasts by popular casino streamers. You can easily tell the difference between a fake streamer and a reliable one; a streamer who loves hype and a genuinely skillful gambler. You can make your way to the top of the gambling Olympus and become a professional streamer with a bit of effort."
-      }
-    },
-    {
-      "topScore": {
+      },
+    
+     {
+       "name": "topScore",
         "imgUrl": "./images/results-icons/top-score.png",
         "points": "90-100",
         "title": "Rising Streaming Star",
         "text": "You know more about streamers than the popular casino streamers themselves do. You do not need to be told what is going on on the gambling and streaming scene. Because you are aware of everything: who, when, how much, under which circumstances, and in what slot win a lot of money or lose everything. We are sure that you are a rising star of the streaming and gambling scene and a future honorable competitor for Roshtein, Xposed, and TrainwrecksTV. Follow your dream and make crazy wins!"
-      }
     }
   ]
 }
