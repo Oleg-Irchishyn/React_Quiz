@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import styles from '../../styles/components/QuizForm.module.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { required } from '../../redux/utils/validators/';
+import { required, emailValidation } from '../../redux/utils/validators/';
 import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createCheckbox, createInput } from '../../components/common/FormControls';
 import { AppStateType } from '../../redux/store';
@@ -33,7 +33,7 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = 
         totalScore: quizResultsScore,
       };
       handleSetVisibleFormSection(false);
-      // sendQuizFormSuccess(newQuizFormObj);
+      sendQuizFormSuccess(newQuizFormObj);
     };
 
     return (
@@ -67,6 +67,7 @@ const AddNewQuizForm: React.FC<InjectedFormProps<AddNewQuizFormValuesType, Props
           {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', [required])}
           {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', [
             required,
+            emailValidation,
           ])}
         </div>
 

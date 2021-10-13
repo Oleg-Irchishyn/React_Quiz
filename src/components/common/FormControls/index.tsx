@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute, ReactNode } from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import styles from '../../../styles/components/FormControls.module.scss';
 import { Field, WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form';
 
