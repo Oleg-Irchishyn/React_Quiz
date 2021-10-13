@@ -5,82 +5,32 @@ import { compose } from 'redux';
 import cn from 'classnames';
 import { AppStateType } from '../../redux/store';
 import { getQuizResults, getQuizResultsScore } from '../../redux/selectors/appSelectors';
-import { LowScore, MiddleScore, HighScore, TopScore } from '../';
+import { ResultsCard } from '../';
+import { quizResults } from '../../redux/types/types';
+import { actions } from '../../redux/reducers/appReducer';
 
-const ResultsScreen: React.FC<MapStatePropsType & ownProps> = React.memo(
-  ({ quizResults, quizResultsScore }) => {
-    const lowScorePoints = Number(quizResultsScore) <= 30;
-    const middleScorePoints = Number(quizResultsScore) <= 60;
-    const highScorePoints = Number(quizResultsScore) <= 80;
-    const topScorePoints = Number(quizResultsScore) <= 100;
+const ResultsScreen: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
+  ({ quizResults, quizResultsScore, showResultsScreen, handleSetVisibleResultsSection }) => {
+    React.useEffect(() => {
+      showResultsScreen(quizResultsScore, quizResults);
+    }, []);
     return (
       <div className={cn(styles.resultsScreen)}>
         <div className={cn(styles.resultsScreen__content)}>
-          {lowScorePoints
-            ? quizResults.map((result, index) => {
-                const { title, points, imgUrl, text } = result;
-                switch (points) {
-                  case '0-30':
-                    return (
-                      <LowScore
-                        key={`${index}_${title}`}
-                        title={title}
-                        points={points}
-                        imgUrl={imgUrl}
-                        text={text}
-                      />
-                    );
-                }
-              })
-            : middleScorePoints
-            ? quizResults.map((result, index) => {
-                const { title, points, imgUrl, text } = result;
-                switch (points) {
-                  case '40-60':
-                    return (
-                      <MiddleScore
-                        key={`${index}_${title}`}
-                        title={title}
-                        points={points}
-                        imgUrl={imgUrl}
-                        text={text}
-                      />
-                    );
-                }
-              })
-            : highScorePoints
-            ? quizResults.map((result, index) => {
-                const { title, points, imgUrl, text } = result;
-                switch (points) {
-                  case '70-80':
-                    return (
-                      <HighScore
-                        key={`${index}_${title}`}
-                        title={title}
-                        points={points}
-                        imgUrl={imgUrl}
-                        text={text}
-                      />
-                    );
-                }
-              })
-            : topScorePoints
-            ? quizResults.map((result, index) => {
-                const { title, points, imgUrl, text } = result;
-                switch (points) {
-                  case '90-100':
-                    return (
-                      <TopScore
-                        key={`${index}_${title}`}
-                        title={title}
-                        points={points}
-                        imgUrl={imgUrl}
-                        text={text}
-                      />
-                    );
-                }
-              })
-            : null}
+          {quizResults.map((result, index) => {
+            const { title, points, imgUrl, text } = result;
+            return (
+              <ResultsCard
+                key={`${index}_${title}`}
+                //@ts-ignore
+                title={title}
+                points={points}
+                imgUrl={imgUrl}
+                text={text}
+                handleSetVisibleResultsSection={handleSetVisibleResultsSection}
+              />
+            );
+          })}
         </div>
       </div>
     );
@@ -93,13 +43,21 @@ const mapStateToProps = (state: AppStateType) => ({
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
+
+type MapDispatchPropsType = {
+  showResultsScreen: (score: number | undefined, results: Array<quizResults>) => void;
+};
+
 type ownProps = {
   imgUrl: any;
   points: string;
   title: string;
   text: string;
+  handleSetVisibleResultsSection: (value: boolean) => void;
 };
 
 export default compose<React.ComponentType>(
-  connect<MapStatePropsType, {}, ownProps, AppStateType>(mapStateToProps, {}),
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
+    showResultsScreen: actions.showResultsScreen,
+  }),
 )(ResultsScreen);

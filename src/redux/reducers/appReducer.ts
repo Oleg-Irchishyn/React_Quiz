@@ -11,6 +11,8 @@ const SET_QUIZ_FORMS = 'quiz/app/SET_QUIZ_FORMS';
 const SET_IS_LOADED = 'quiz/app/SET_IS_LOADING';
 const ADD_QUIZ_FORM = 'quiz/app/ADD_QUIZ_FORM';
 const CALC_QUIZ_RESULTS_SCORE = 'quiz/app/CALC_QUIZ_RESULTS_SCORE';
+const RESET_QUIZ_ANSWERS = 'quiz/app/RESET_QUIZ_ANSWERS';
+const RESET_QUIZ_RESULTS_SCORE = 'quiz/app/RESET_QUIZ_RESULTS_SCORE';
 const SHOW_RESULTS_SCREEN = 'quiz/app/SHOW_RESULTS_SCREEN';
 
 let initialState = {
@@ -71,6 +73,18 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         quizForms: [...state.quizForms, action.obj],
       };
     }
+    case RESET_QUIZ_ANSWERS: {
+      return {
+        ...state,
+        quizAnswers: [],
+      };
+    }
+    case RESET_QUIZ_RESULTS_SCORE: {
+      return {
+        ...state,
+        quizResultsScore: action.val,
+      };
+    }
     case CALC_QUIZ_RESULTS_SCORE: {
       const quizAnswersCorrectCount = state.quizAnswers.filter((item) => {
         return item.correct === true;
@@ -119,6 +133,8 @@ export const actions = {
   setQuizAnswers: (answer: answerType) => ({ type: SET_QUIZ_ANSWERS, answer } as const),
   setQuizForms: (forms: Array<quizFormType>) => ({ type: SET_QUIZ_FORMS, forms } as const),
   addQuizForm: (obj: quizFormType) => ({ type: ADD_QUIZ_FORM, obj } as const),
+  resetQuizAnswers: () => ({ type: RESET_QUIZ_ANSWERS } as const),
+  resetQuizResultsScore: (val: number) => ({ type: RESET_QUIZ_RESULTS_SCORE, val } as const),
   calcQuizResultsScore: () => ({ type: CALC_QUIZ_RESULTS_SCORE } as const),
   showResultsScreen: (score: number | undefined, results: Array<quizResults>) =>
     ({ type: SHOW_RESULTS_SCREEN, score, results } as const),

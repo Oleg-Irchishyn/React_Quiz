@@ -44,6 +44,11 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
       setVisibleResultsSection(true);
     };
 
+    const handleSetVisibleResultsSection = (value: boolean): void => {
+      setVisibleResultsSection(value);
+      setVisibleStartSection(true);
+    };
+
     if (!initialized) {
       return <Preloader />;
     }
@@ -59,7 +64,10 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
           //@ts-ignore
           <SuspendedQuizForm handleSetVisibleFormSection={handleSetVisibleFormSection} />
         )}
-        {visibleResultsSection && <SuspendedResultsScreen />}
+        {visibleResultsSection && (
+          //@ts-ignore
+          <SuspendedResultsScreen handleSetVisibleResultsSection={handleSetVisibleResultsSection} />
+        )}
       </div>
     );
   },
@@ -78,10 +86,11 @@ type ownProps = {
   handleSetVisibleSection: (value: boolean) => void;
   handleSetVisibleSliderSection: (value: boolean) => void;
   handleSetVisibleFormSection: (value: boolean) => void;
+  handleSetVisibleResultsSection: (value: boolean) => void;
 };
 
 export default compose<React.ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     initializeApp,
   }),
   withRouter,
