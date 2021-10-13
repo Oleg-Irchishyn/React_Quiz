@@ -26,7 +26,7 @@ const ResultsCard: React.FC<MapDispatchPropsType & ownProps> = React.memo(
     return (
       <div className={cn(styles.content__inner)}>
         <h2 className={cn(styles.content__title)}>{title}</h2>
-        <p className={cn(styles.content__score)}>{points}</p>
+        <p className={cn(styles.content__score)}>{`${points} points`}</p>
         <div className={cn(styles.content__body)}>
           <div className={cn(styles.body__img)}>
             <img src={imgUrl} />

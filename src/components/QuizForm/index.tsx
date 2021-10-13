@@ -33,7 +33,7 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = 
         totalScore: quizResultsScore,
       };
       handleSetVisibleFormSection(false);
-      // sendQuizFormSuccess(newQuizFormObj);
+      sendQuizFormSuccess(newQuizFormObj);
     };
 
     return (
