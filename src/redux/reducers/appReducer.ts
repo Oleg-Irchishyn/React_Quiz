@@ -11,6 +11,7 @@ const SET_QUIZ_FORMS = 'quiz/app/SET_QUIZ_FORMS';
 const SET_IS_LOADED = 'quiz/app/SET_IS_LOADING';
 const ADD_QUIZ_FORM = 'quiz/app/ADD_QUIZ_FORM';
 const CALC_QUIZ_RESULTS_SCORE = 'quiz/app/CALC_QUIZ_RESULTS_SCORE';
+const SHOW_RESULTS_SCREEN = 'quiz/app/SHOW_RESULTS_SCREEN';
 
 let initialState = {
   initialized: false as boolean,
@@ -80,6 +81,30 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         quizResultsScore: calcResultsScore,
       };
     }
+    case SHOW_RESULTS_SCREEN: {
+      const filterQuizResults = (score: number | undefined, results: Array<quizResults>) => {
+        switch (true) {
+          case Number(score) <= 30: {
+            return results.filter((result) => result.points === '0-30');
+          }
+          case Number(score) <= 60: {
+            return results.filter((result) => result.points === '40-60');
+          }
+          case Number(score) <= 80: {
+            return results.filter((result) => result.points === '70-80');
+          }
+          case Number(score) <= 100: {
+            return results.filter((result) => result.points === '90-100');
+          }
+          default:
+            return results;
+        }
+      };
+      return {
+        ...state,
+        quizResults: filterQuizResults(action.score, action.results),
+      };
+    }
     default:
       return state;
   }
@@ -95,6 +120,8 @@ export const actions = {
   setQuizForms: (forms: Array<quizFormType>) => ({ type: SET_QUIZ_FORMS, forms } as const),
   addQuizForm: (obj: quizFormType) => ({ type: ADD_QUIZ_FORM, obj } as const),
   calcQuizResultsScore: () => ({ type: CALC_QUIZ_RESULTS_SCORE } as const),
+  showResultsScreen: (score: number | undefined, results: Array<quizResults>) =>
+    ({ type: SHOW_RESULTS_SCREEN, score, results } as const),
 };
 
 export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
