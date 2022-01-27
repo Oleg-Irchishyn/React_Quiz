@@ -27,7 +27,7 @@ const QuizNextArrow = (props: any) => {
     <div
       className={cn(styles.quizSlider__next_arrow)}
       onClick={() => handleSetVisibleSliderSection(false)}>
-      Resluts
+      Results
     </div>
   ) : (
     <div className={cn(styles.quizSlider__next_arrow)} onClick={onClick}>
