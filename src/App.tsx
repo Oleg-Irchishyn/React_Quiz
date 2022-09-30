@@ -18,7 +18,7 @@ const SuspendedQuizSlider = withSuspense(QuizSlider);
 const SuspendedQuizForm = withSuspense(QuizForm);
 const SuspendedResultsScreen = withSuspense(ResultsScreen);
 
-const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
+export const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, initialized }) => {
     React.useEffect(() => {
       initializeApp();

@@ -76,7 +76,9 @@ const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(
     return (
       <div className={cn(styles.quizSlider__wrapper)}>
         <p className={cn(styles.quizSlider__descr)}>Pump your brain</p>
-        <h1 className={cn(styles.quizSlider__title)}>IQ - test for a gambler</h1>
+        <h1 data-testid="quiz-slider-title" className={cn(styles.quizSlider__title)}>
+          IQ - test for a gambler
+        </h1>
         <Slider {...settings} className={cn(styles.quizSlider)}>
           {quizQuestions.map((item, index) => {
             const { id } = item;

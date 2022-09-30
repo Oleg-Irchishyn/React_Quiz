@@ -14,7 +14,10 @@ const StartScreen: React.FC<ownProps> = React.memo(({ handleSetVisibleSection })
           have a chance to be one of the most popular casino streamers with over a million
           followers! We believe in you!
         </div>
-        <button className={cn(styles.content__btn)} onClick={() => handleSetVisibleSection(false)}>
+        <button
+          data-testid="start-screen-btn"
+          className={cn(styles.content__btn)}
+          onClick={() => handleSetVisibleSection(false)}>
           Start
         </button>
       </div>
