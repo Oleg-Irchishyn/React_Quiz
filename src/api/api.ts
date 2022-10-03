@@ -1,4 +1,4 @@
-import { quizFormType } from './../redux/types/types';
+import { quizFormType, quizQuestionType, quizResults } from './../redux/types/types';
 import axios from 'axios';
 
 const instance = axios.create({
@@ -8,17 +8,17 @@ const instance = axios.create({
 
 export const mainAPI = {
   getQuizQuestions: () => {
-    return instance.get(`quizQuestions`).then((response) => {
+    return instance.get<quizQuestionType[]>(`quizQuestions`).then((response) => {
       return response.data;
     });
   },
   getQuizResults: () => {
-    return instance.get(`quizResults`).then((response) => {
+    return instance.get<quizResults[]>(`quizResults`).then((response) => {
       return response.data;
     });
   },
   getQuizForms: () => {
-    return instance.get(`quizForms`).then((response) => {
+    return instance.get<quizFormType[]>(`quizForms`).then((response) => {
       return response.data;
     });
   },

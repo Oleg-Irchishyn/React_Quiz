@@ -39,7 +39,7 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = 
     return (
       <div className={cn(styles.quizForm__wrapper)}>
         <div className={cn(styles.quizForm)}>
-          <div className={cn(styles.quizForm__caption)}>
+          <div data-testid="quiz-form-caption" className={cn(styles.quizForm__caption)}>
             <h2>
               You have gained
               <span>{quizResultsScore && quizResultsScore > 0 ? quizResultsScore : 0}</span>points
@@ -58,42 +58,43 @@ const QuizForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = 
   },
 );
 
-const AddNewQuizForm: React.FC<InjectedFormProps<AddNewQuizFormValuesType, PropsType> & PropsType> =
-  (props) => {
-    const { isLoading, handleSubmit } = props;
-    return (
-      <form className={cn(styles.quizForm__content)} onSubmit={handleSubmit}>
-        <div className={cn(styles.content__top)}>
-          {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', [required])}
-          {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', [
-            required,
-            emailValidation,
-          ])}
-        </div>
+const AddNewQuizForm: React.FC<
+  InjectedFormProps<AddNewQuizFormValuesType, PropsType> & PropsType
+> = (props) => {
+  const { isLoading, handleSubmit } = props;
+  return (
+    <form className={cn(styles.quizForm__content)} onSubmit={handleSubmit}>
+      <div className={cn(styles.content__top)}>
+        {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', [required])}
+        {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', [
+          required,
+          emailValidation,
+        ])}
+      </div>
 
-        <div className={cn(styles.content__middle)}>
-          {createCheckbox<AddNewPostFormValuesTypeKeys>(
-            'personalData',
-            'personalData',
-            'checkbox',
-            'I consent to the processing of my personal data',
-            [required],
-          )}
+      <div className={cn(styles.content__middle)}>
+        {createCheckbox<AddNewPostFormValuesTypeKeys>(
+          'personalData',
+          'personalData',
+          'checkbox',
+          'I consent to the processing of my personal data',
+          [required],
+        )}
 
-          {createCheckbox<AddNewPostFormValuesTypeKeys>(
-            'subscribe',
-            'subscribe',
-            'checkbox',
-            'Subscribe to news updates',
-            [],
-          )}
-        </div>
-        <div className={cn(styles.content__bottom)}>
-          <button disabled={isLoading}>Submit</button>
-        </div>
-      </form>
-    );
-  };
+        {createCheckbox<AddNewPostFormValuesTypeKeys>(
+          'subscribe',
+          'subscribe',
+          'checkbox',
+          'Subscribe to news updates',
+          [],
+        )}
+      </div>
+      <div className={cn(styles.content__bottom)}>
+        <button disabled={isLoading}>Submit</button>
+      </div>
+    </form>
+  );
+};
 
 const AddNewQuizFormRedux = reduxForm<AddNewQuizFormValuesType, PropsType>({
   form: 'addNewQuizForm',

@@ -9,9 +9,10 @@ import 'slick-carousel/slick/slick-theme.css';
 import { AppStateType } from '../../../redux/store';
 import { getQuizQuestions } from '../../../redux/selectors/appSelectors';
 import { QuizSliderItem } from '..';
-import { answerType } from '../../../redux/types/types';
+import { answerType, quizQuestionType } from '../../../redux/types/types';
+import { renderSliderNextArrow } from './helpers/renderSliderNextArrow';
 
-const QuizPrevArrow = (props: any) => {
+export const QuizPrevArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div className={cn(styles.quizSlider__prev_arrow)} onClick={onClick}>
@@ -20,20 +21,9 @@ const QuizPrevArrow = (props: any) => {
   );
 };
 
-const QuizNextArrow = (props: any) => {
+export const QuizNextArrow = (props?: any) => {
   const { onClick, currentSlide, quizQuestions, handleSetVisibleSliderSection } = props;
-
-  return Number(currentSlide) === quizQuestions.length - 1 ? (
-    <div
-      className={cn(styles.quizSlider__next_arrow)}
-      onClick={() => handleSetVisibleSliderSection(false)}>
-      Results
-    </div>
-  ) : (
-    <div className={cn(styles.quizSlider__next_arrow)} onClick={onClick}>
-      Forward
-    </div>
-  );
+  return renderSliderNextArrow(onClick, handleSetVisibleSliderSection, currentSlide, quizQuestions);
 };
 
 const QuizSlider: React.FC<MapStatePropsType & ownProps> = React.memo(

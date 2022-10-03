@@ -140,7 +140,7 @@ export const actions = {
     ({ type: SHOW_RESULTS_SCREEN, score, results } as const),
 };
 
-export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+export const setQuizQustionsSuccess = (): ThunkType => async (dispatch) => {
   try {
     let data = await mainAPI.getQuizQuestions();
     dispatch(actions.setQuizQustions(data));
@@ -151,7 +151,7 @@ export const setQuizQustionsSuccess = (): ThunkType => async (dispatch: ThunkDis
   }
 };
 
-export const setQuizResultsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+export const setQuizResultsSuccess = (): ThunkType => async (dispatch) => {
   try {
     let data = await mainAPI.getQuizResults();
     dispatch(actions.setQuizResults(data));
@@ -162,7 +162,7 @@ export const setQuizResultsSuccess = (): ThunkType => async (dispatch: ThunkDisp
   }
 };
 
-export const setQuizFormsSuccess = (): ThunkType => async (dispatch: ThunkDispatchType) => {
+export const setQuizFormsSuccess = (): ThunkType => async (dispatch) => {
   try {
     let data = await mainAPI.getQuizForms();
     dispatch(actions.setQuizForms(data));
@@ -175,7 +175,7 @@ export const setQuizFormsSuccess = (): ThunkType => async (dispatch: ThunkDispat
 
 export const sendQuizFormSuccess =
   (obj: quizFormType): ThunkType =>
-  async (dispatch: ThunkDispatchType) => {
+  async (dispatch) => {
     const { id, name, email, personalDataAccept, subscribe, totalScore } = obj;
     try {
       let data = await mainAPI.sendQuizForm(

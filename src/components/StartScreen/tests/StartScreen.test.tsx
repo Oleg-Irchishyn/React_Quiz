@@ -1,10 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { StartScreen, QuizSlider } from '../../../components';
+import { StartScreen } from '../../../components';
+import { QuizSlider } from '../../common';
 import { renderTestApp } from '../../../helpers/renderTestApp';
-
-jest.mock('axios');
 
 const handleSetVisibleSection: (value: boolean) => void = jest.fn();
 

@@ -1,5 +1,3 @@
-import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
-
 export type quizQuestionType = {
   id: string | number;
   imgUrl: any;
