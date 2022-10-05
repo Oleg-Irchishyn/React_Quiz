@@ -65,7 +65,13 @@ const AddNewQuizForm: React.FC<
   return (
     <form className={cn(styles.quizForm__content)} onSubmit={handleSubmit}>
       <div className={cn(styles.content__top)}>
-        {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Name', 'name', 'text', [required])}
+        {createInput<AddNewPostFormValuesTypeKeys>(
+          uuidv4(),
+          'Please enter your name',
+          'name',
+          'text',
+          [required],
+        )}
         {createInput<AddNewPostFormValuesTypeKeys>(uuidv4(), 'Email*', 'email', 'text', [
           required,
           emailValidation,
@@ -90,7 +96,9 @@ const AddNewQuizForm: React.FC<
         )}
       </div>
       <div className={cn(styles.content__bottom)}>
-        <button disabled={isLoading}>Submit</button>
+        <button data-testid="subscribe-btn" disabled={isLoading}>
+          Submit
+        </button>
       </div>
     </form>
   );

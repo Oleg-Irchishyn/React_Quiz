@@ -15,7 +15,7 @@ const ResultsScreen: React.FC<MapStatePropsType & MapDispatchPropsType & ownProp
       showResultsScreen(quizResultsScore, quizResults);
     }, []);
     return (
-      <div className={cn(styles.resultsScreen)}>
+      <div data-testid="results-screen" className={cn(styles.resultsScreen)}>
         <div className={cn(styles.resultsScreen__content)}>
           {quizResults.map((result, index) => {
             const { title, points, imgUrl, text } = result;

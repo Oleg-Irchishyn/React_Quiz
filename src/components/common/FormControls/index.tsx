@@ -24,7 +24,14 @@ const renderedInput: React.FC<FormControlPropsType> = ({
   const hasError = touched && error;
   return (
     <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-      <input id={id} {...input} placeholder={placeholder} type={type} autoComplete="off" />
+      <input
+        data-testid={`${id}`}
+        id={id}
+        {...input}
+        placeholder={placeholder}
+        type={type}
+        autoComplete="off"
+      />
       <label htmlFor={id}>
         <p>{label}</p>
       </label>

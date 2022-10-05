@@ -6,6 +6,7 @@ export type quizQuestionType = {
 };
 
 export type quizResults = {
+  name: string;
   imgUrl: any;
   points: string;
   title: string;

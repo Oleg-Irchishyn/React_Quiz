@@ -1,7 +1,12 @@
 import React from 'react';
 import { mainAPI } from '../../../../api/api';
-import { quizFormType, quizQuestionType } from '../../../../redux/types/types';
-import { actions, setQuizQustionsSuccess, sendQuizFormSuccess } from '../../appReducer';
+import { quizFormType, quizQuestionType, quizResults } from '../../../../redux/types/types';
+import {
+  actions,
+  setQuizQustionsSuccess,
+  sendQuizFormSuccess,
+  setQuizResultsSuccess,
+} from '../../appReducer';
 
 jest.mock('../../../../api/api');
 
@@ -13,6 +18,7 @@ const getStateMock = jest.fn();
 describe(`Test appReducer's thunks`, () => {
   let questions: quizQuestionType[];
   let quizForm: quizFormType;
+  let quizResults: quizResults[];
 
   beforeEach(() => {
     questions = [
@@ -85,6 +91,36 @@ describe(`Test appReducer's thunks`, () => {
       subscribe: true,
       totalScore: 100,
     };
+    quizResults = [
+      {
+        name: 'lowScore',
+        imgUrl: './images/results-icons/low-score.png',
+        points: '0-30',
+        title: 'Casino Streamers? Who are these people?',
+        text: 'You probably came to this page by accident. Or maybe you are just starting to get acquainted with the gambling and streaming enterprising world. Either way, you still have a lot to learn. Go to our website, read some helpful articles, and we guarantee – you will catch up fast.',
+      },
+      {
+        name: 'middleScore',
+        imgUrl: './images/results-icons/middle-score.png',
+        points: '40-60',
+        title: 'Newbie',
+        text: 'It looks like you are just starting to get to know the streaming business, but you are already getting to grips with the key people and events. You have great potential and an apparent interest in gambling. Watch more casino streams, read our regular digest with the biggest online slot wins, and you will have all the chances to turn from a newcomer into a compulsive gambler with a huge fan base.',
+      },
+      {
+        name: 'highScore',
+        imgUrl: './images/results-icons/high-score.png',
+        points: '70-80',
+        title: 'Professional streamer!',
+        text: 'You know your way around the gambling scene almost excellently. And you know not only about the highest wins but also what happens during live broadcasts by popular casino streamers. You can easily tell the difference between a fake streamer and a reliable one; a streamer who loves hype and a genuinely skillful gambler. You can make your way to the top of the gambling Olympus and become a professional streamer with a bit of effort.',
+      },
+      {
+        name: 'topScore',
+        imgUrl: './images/results-icons/top-score.png',
+        points: '90-100',
+        title: 'Rising Streaming Star',
+        text: 'You know more about streamers than the popular casino streamers themselves do. You do not need to be told what is going on on the gambling and streaming scene. Because you are aware of everything: who, when, how much, under which circumstances, and in what slot win a lot of money or lose everything. We are sure that you are a rising star of the streaming and gambling scene and a future honorable competitor for Roshtein, Xposed, and TrainwrecksTV. Follow your dream and make crazy wins!',
+      },
+    ];
   });
 
   afterEach(() => {
@@ -107,5 +143,15 @@ describe(`Test appReducer's thunks`, () => {
     expect(dispatchMock).toBeCalledTimes(2);
     expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.addQuizForm(quizForm));
     expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.setIsLoaded(false));
+  });
+
+  test(`setQuizResultsSuccess thunk test`, async () => {
+    mainAPIMock.getQuizResults.mockReturnValue(Promise.resolve(quizResults));
+    const thunk = setQuizResultsSuccess();
+    await thunk(dispatchMock, getStateMock, {});
+    expect(dispatchMock).toBeCalledTimes(2);
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setQuizResults(quizResults));
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.setIsLoaded(false));
+    expect(quizResults.length).toBeGreaterThan(2);
   });
 });
